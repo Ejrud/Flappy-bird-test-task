@@ -12,7 +12,7 @@ public class WallBuilder : MonoBehaviour
     private Wall _previousWall;
     private float _previousHolePositonY;
     
-    public void Init(WallPool wallPool, LevelConfig levelConfig)
+    public void UpdateValues(WallPool wallPool, LevelConfig levelConfig)
     {
         _wallPool = wallPool;
         
@@ -29,9 +29,9 @@ public class WallBuilder : MonoBehaviour
             SpawnWall();
         
         // Hide walls
-        Wall lastWall = _wallPool.activeWalls.Peek();
-        if (lastWall.transform.position.x <= _endPosition.x)
-            _wallPool.Enqueue(lastWall);
+        if (_wallPool.activeWalls.TryPeek(out Wall lastWall))
+            if (lastWall.transform.position.x <= _endPosition.x)
+                _wallPool.Enqueue(lastWall);
     }
 
     public void SpawnWall()

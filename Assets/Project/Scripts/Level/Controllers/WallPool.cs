@@ -10,9 +10,13 @@ public class WallPool : MonoBehaviour
 
     private Queue<Wall> _wallPool = new ();
     private Queue<Wall> _activeWalls = new ();
+    private HashSet<GameObject> _wallObjects = new ();
 
-    public void Init()
+    public void UpdateValues()
     {
+        foreach (var wallObj in _wallObjects)
+            Destroy(wallObj);
+        
         _wallPool = new Queue<Wall>();
         _activeWalls = new Queue<Wall>();
     }
@@ -39,6 +43,7 @@ public class WallPool : MonoBehaviour
     {
         Wall wall = Instantiate(_wallPrefab);
         wall.transform.SetParent(_parent);
+        _wallObjects.Add(wall.gameObject);
         wall.IsActive = false;
         return wall;
     }

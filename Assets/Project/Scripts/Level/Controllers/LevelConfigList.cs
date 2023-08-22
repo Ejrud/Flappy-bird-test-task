@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConfigList : MonoBehaviour
+public class LevelConfigList : MonoBehaviour
 {
     [SerializeField] private LevelConfig[] _levels;
     private Dictionary<LevelDifficulty, LevelConfig> _levelDictionary = new ();

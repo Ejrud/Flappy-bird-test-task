@@ -1,37 +1,33 @@
 using UnityEngine;
 
+[RequireComponent(typeof(LevelConfigList))]
 [RequireComponent(typeof(WallTransition))]
 [RequireComponent(typeof(WallBuilder))]
 [RequireComponent(typeof(WallPool))]
-[RequireComponent(typeof(ConfigList))]
 public class LevelController : MonoBehaviour
 {
+    private LevelConfigList _levelConfigList;
     private WallTransition _wallTransition;
     private WallBuilder _wallBuilder;
-    private ConfigList _configList;
     private WallPool _wallPool;
     
     private LevelConfig _currentLevelConfig;
     private bool _isPlaying;
 
-    private void Start()
+    public void Initialize()
     {
         _wallTransition = GetComponent<WallTransition>();
         _wallBuilder = GetComponent<WallBuilder>();
         _wallPool = GetComponent<WallPool>();
-        _configList = GetComponent<ConfigList>();
-
-        InitializeComponents();
-        
-        // invoke on button pressed
-        StartGame(LevelDifficulty.Hard);
+        _levelConfigList = GetComponent<LevelConfigList>();
+        _wallTransition.Init(_wallPool);
     }
 
     public void StartGame(LevelDifficulty difficulty)
     { 
-        _currentLevelConfig = _configList.GetLevelConfig(difficulty);
-        UpdateComponents();
-        
+        _currentLevelConfig = _levelConfigList.GetLevelConfig(difficulty);
+        _wallBuilder.UpdateValues(_wallPool, _currentLevelConfig);
+        _wallPool.UpdateValues();
         _wallBuilder.SpawnWall();
         _isPlaying = true;
     }
@@ -45,15 +41,5 @@ public class LevelController : MonoBehaviour
         
         _wallTransition.Tick(delta * _currentLevelConfig.speed);
         _wallBuilder.Tick();
-    }
-
-    private void UpdateComponents()
-    {
-        _wallBuilder.Init(_wallPool, _currentLevelConfig);
-    }
-
-    private void InitializeComponents()
-    {
-        _wallTransition.Init(_wallPool);
     }
 }
