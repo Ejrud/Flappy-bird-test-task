@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class WallBuilder : MonoBehaviour
 {
-    [SerializeField] private Vector3 _spawnPosition;
-    [SerializeField] private Vector3 _endPosition;
-
     private const float MAX_WALL_HEIGHT = 5f;
+    
+    [SerializeField] private Vector3 _spawnViewportPosition;
+    [SerializeField] private Vector3 _endViewportPosition;
+
+    private Vector3 _spawnPosition;
+    private Vector3 _endPosition;
     
     private LevelConfig _levelConfig;
     private WallPool _wallPool;
@@ -14,9 +17,13 @@ public class WallBuilder : MonoBehaviour
     
     public void UpdateValues(WallPool wallPool, LevelConfig levelConfig)
     {
-        _wallPool = wallPool;
+        _spawnPosition = Camera.main.ViewportToWorldPoint(_spawnViewportPosition);
+        _endPosition = Camera.main.ViewportToWorldPoint(_endViewportPosition);
+
+        _spawnPosition.z = 0f;
+        _endPosition.z = 0f;
         
-        // TODO create a separate method for this
+        _wallPool = wallPool;
         _levelConfig = levelConfig;
         _previousHolePositonY = 0;
     }
