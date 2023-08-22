@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a82480822e67a4c41b2af8520a0c942d, type: 3}
-  m_Name: LevelConfig
+  m_Name: LevelConfig (Hard)
   m_EditorClassIdentifier: 
-  difficulty: 0
+  difficulty: 2
   wallPrefab: {fileID: 2172455921549379971, guid: d5c7564d6338f274fa2c5f52c1886603, type: 3}
   multiplySpeedByScore: 1
-  speed: 0.5
+  speed: 2.5
   wallDistance: 5
-  wallOffset: 0
-  holeSize: 3
+  holeOffset: 2.5
+  holeSize: 2
+  middleHoleHeght: 2

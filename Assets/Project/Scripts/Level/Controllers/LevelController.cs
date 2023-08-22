@@ -6,13 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(ConfigList))]
 public class LevelController : MonoBehaviour
 {
-    private LevelConfig _currentLevelConfig;
-    private ConfigList _configList;
-    
     private WallTransition _wallTransition;
     private WallBuilder _wallBuilder;
+    private ConfigList _configList;
     private WallPool _wallPool;
     
+    private LevelConfig _currentLevelConfig;
     private bool _isPlaying;
 
     private void Start()
@@ -21,18 +20,20 @@ public class LevelController : MonoBehaviour
         _wallBuilder = GetComponent<WallBuilder>();
         _wallPool = GetComponent<WallPool>();
         _configList = GetComponent<ConfigList>();
+
+        InitializeComponents();
         
-        StartGame(LevelDifficulty.Easy);
+        // invoke on button pressed
+        StartGame(LevelDifficulty.Hard);
     }
 
     public void StartGame(LevelDifficulty difficulty)
     { 
         _currentLevelConfig = _configList.GetLevelConfig(difficulty);
-        InitComponents();
+        UpdateComponents();
         
         _wallBuilder.SpawnWall();
         _isPlaying = true;
-        Debug.Log(_isPlaying);
     }
 
     private void Update()
@@ -46,9 +47,13 @@ public class LevelController : MonoBehaviour
         _wallBuilder.Tick();
     }
 
-    private void InitComponents()
+    private void UpdateComponents()
+    {
+        _wallBuilder.Init(_wallPool, _currentLevelConfig);
+    }
+
+    private void InitializeComponents()
     {
         _wallTransition.Init(_wallPool);
-        _wallBuilder.Init(_wallPool, _currentLevelConfig.wallDistance);
     }
 }

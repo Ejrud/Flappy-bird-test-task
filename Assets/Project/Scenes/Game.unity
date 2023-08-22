@@ -275,6 +275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - {fileID: 11400000, guid: 7782bd9c801ebb24eb74fac79857c686, type: 2}
+  - {fileID: 11400000, guid: a2723acae86bba9449a2e40584e58189, type: 2}
+  - {fileID: 11400000, guid: 792dc642d51cb6b48b86406713813545, type: 2}
 --- !u!114 &654708681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be93303bfbd9409babe1eb5de5d9ac49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 5
+  _jumpForce: 4
 --- !u!58 &2105094734
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,12 @@ public class WallPool : MonoBehaviour
 
     private Queue<Wall> _wallPool = new ();
     private Queue<Wall> _activeWalls = new ();
+
+    public void Init()
+    {
+        _wallPool = new Queue<Wall>();
+        _activeWalls = new Queue<Wall>();
+    }
 
     public void Enqueue(Wall wall)
     {

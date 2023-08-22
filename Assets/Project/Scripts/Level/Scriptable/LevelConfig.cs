@@ -8,6 +8,7 @@ public class LevelConfig : ScriptableObject
     public int multiplySpeedByScore;
     public float speed;
     public float wallDistance;
-    public float wallOffset;
+    public float holeOffset;
     public float holeSize;
+    public float middleHoleHeght;
 }
