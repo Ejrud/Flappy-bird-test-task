@@ -224,6 +224,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 689721227}
+  - component: {fileID: 689721229}
+  - component: {fileID: 689721228}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -247,6 +249,35 @@ Transform:
   - {fileID: 816542834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &689721228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689721226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a7145124d924943b2acea20f7a74a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadPath: 
+  _playerModel:
+    levelDifficulty: 0
+    soundValue: 0
+    maxScore: 0
+--- !u!114 &689721229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689721226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f75f31a5e4744219bd2eccf123a12f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &816542833
 PrefabInstance:
   m_ObjectHideFlags: 0

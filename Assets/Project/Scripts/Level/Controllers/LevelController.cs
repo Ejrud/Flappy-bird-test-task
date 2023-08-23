@@ -1,35 +1,65 @@
+using System;
+using Player;
 using UnityEngine;
 
+[RequireComponent(typeof(ScoreCounter))]
+[RequireComponent(typeof(PlayerSpawner))]
 [RequireComponent(typeof(LevelConfigList))]
 [RequireComponent(typeof(WallTransition))]
 [RequireComponent(typeof(WallBuilder))]
 [RequireComponent(typeof(WallPool))]
 public class LevelController : MonoBehaviour
 {
+    public event Action<int, LevelDifficulty> OnStopGame;
+
+    private ScoreCounter _scoreCounter;
+    private PlayerSpawner _playerSpawner;
     private LevelConfigList _levelConfigList;
     private WallTransition _wallTransition;
     private WallBuilder _wallBuilder;
     private WallPool _wallPool;
     
     private LevelConfig _currentLevelConfig;
+    private PlayerController _player;
+    
     private bool _isPlaying;
 
     public void Initialize()
     {
+        _scoreCounter = GetComponent<ScoreCounter>();
+        _playerSpawner = GetComponent<PlayerSpawner>();
         _wallTransition = GetComponent<WallTransition>();
+        _levelConfigList = GetComponent<LevelConfigList>();
         _wallBuilder = GetComponent<WallBuilder>();
         _wallPool = GetComponent<WallPool>();
-        _levelConfigList = GetComponent<LevelConfigList>();
+        
         _wallTransition.Init(_wallPool);
+        _wallPool.Init(_scoreCounter);
     }
 
     public void StartGame(LevelDifficulty difficulty)
     { 
         _currentLevelConfig = _levelConfigList.GetLevelConfig(difficulty);
-        _wallBuilder.UpdateValues(_wallPool, _currentLevelConfig);
+        
         _wallPool.UpdateValues();
+        _wallBuilder.UpdateValues(_wallPool, _currentLevelConfig);
         _wallBuilder.SpawnWall();
+        
+        _player = _playerSpawner.Spawn();
+        _player.collisionComponent.OnCollisionDetected += EndGame;
+        _player.Freeze(false);
+        
+        _scoreCounter.Reset();
         _isPlaying = true;
+    }
+    
+    private void EndGame()
+    {
+        _player.collisionComponent.OnCollisionDetected -= EndGame;
+        _player.Freeze(true);
+        _isPlaying = false;
+
+        OnStopGame?.Invoke(_scoreCounter.currentScore, _currentLevelConfig.difficulty);
     }
 
     private void Update()
@@ -41,5 +71,10 @@ public class LevelController : MonoBehaviour
         
         _wallTransition.Tick(delta * _currentLevelConfig.speed);
         _wallBuilder.Tick();
+    }
+
+    private void OnDestroy()
+    {
+        _player.collisionComponent.OnCollisionDetected -= EndGame;
     }
 }

@@ -8,15 +8,26 @@ public class WallPool : MonoBehaviour
     [SerializeField] private Wall _wallPrefab;
     [SerializeField] private Transform _parent;
 
+    private ScoreCounter _scoreCounter;
+
     private Queue<Wall> _wallPool = new ();
     private Queue<Wall> _activeWalls = new ();
-    private HashSet<GameObject> _wallObjects = new ();
+    private HashSet<Wall> _walls = new ();
+    
+    public void Init(ScoreCounter scoreCounter)
+    {
+        _scoreCounter = scoreCounter;
+    }
 
     public void UpdateValues()
     {
-        foreach (var wallObj in _wallObjects)
-            Destroy(wallObj);
-        
+        foreach (var wall in _walls)
+        {
+            wall.hole.OnPlayerEnter -= _scoreCounter.Add;
+            Destroy(wall.gameObject);
+        }
+
+        _walls = new HashSet<Wall>();
         _wallPool = new Queue<Wall>();
         _activeWalls = new Queue<Wall>();
     }
@@ -42,9 +53,10 @@ public class WallPool : MonoBehaviour
     private Wall CreateWall()
     {
         Wall wall = Instantiate(_wallPrefab);
+        wall.hole.OnPlayerEnter += _scoreCounter.Add;
         wall.transform.SetParent(_parent);
-        _wallObjects.Add(wall.gameObject);
         wall.IsActive = false;
+        _walls.Add(wall);
         return wall;
     }
 }

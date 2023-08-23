@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WallBuilder : MonoBehaviour
 {
+    // Высота пространста равна 10 единицам при любых соотношениях сторон экрана
     private const float MAX_WALL_HEIGHT = 5f;
     
     [SerializeField] private Vector3 _spawnViewportPosition;

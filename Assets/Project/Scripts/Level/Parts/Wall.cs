@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
+    public Hole hole => _hole;
+    
     public bool IsActive
     {
         get { return _isActive; }
@@ -11,6 +13,8 @@ public class Wall : MonoBehaviour
             gameObject.SetActive(_isActive);
         }
     }
+
+    [SerializeField] private Hole _hole;
     
     [Header("Top wall")]
     [SerializeField] private SpriteRenderer _topSpriteRenderer;

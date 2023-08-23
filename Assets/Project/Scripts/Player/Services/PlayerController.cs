@@ -21,6 +21,11 @@ namespace Player
             InitializeComponents();
         }
 
+        public void Freeze(bool value)
+        {
+            _jumpComponent.isFreeze = value;
+        }
+
         private void InitializeComponents()
         {
             _jumpComponent.Init(_inputService);

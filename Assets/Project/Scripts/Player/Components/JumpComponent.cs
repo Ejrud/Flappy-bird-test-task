@@ -6,11 +6,22 @@ namespace Player
     [RequireComponent(typeof(CircleCollider2D))]
     public class JumpComponent : MonoBehaviour
     {
+        public bool isFreeze
+        {
+            get { return _isFreeze; }
+            set
+            {
+                _isFreeze = value;
+                _rigidbody2D.simulated = !_isFreeze;
+            }
+        }
+
         [Header("Settings")] 
-        [SerializeField] private float _jumpForce = 5f;
+        [SerializeField] private float _jumpForce = 4f;
         
         private Rigidbody2D _rigidbody2D;
         private InputService _inputService;
+        private bool _isFreeze;
 
         public void Init(InputService inputService)
         {
@@ -21,6 +32,9 @@ namespace Player
 
         public void Jump()
         {
+            if (_isFreeze)
+                return;
+            
             _rigidbody2D.velocity = Vector2.zero;
             _rigidbody2D.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
         }
