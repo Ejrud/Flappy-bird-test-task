@@ -36,7 +36,7 @@ public class DataService : MonoBehaviour
         else
         {
             ScoresModel scoresModel = new ScoresModel();
-            _playerModel = new PlayerModel(LevelDifficulty.Easy, scoresModel, 0);
+            _playerModel = new PlayerModel(LevelDifficulty.Easy, scoresModel, 0.5f);
         }
     }
     

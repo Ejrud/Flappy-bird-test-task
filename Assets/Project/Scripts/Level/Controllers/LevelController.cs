@@ -33,7 +33,7 @@ public class LevelController : MonoBehaviour
         _wallBuilder = GetComponent<WallBuilder>();
         _wallPool = GetComponent<WallPool>();
         
-        _wallTransition.Init(_wallPool);
+        _wallTransition.Init(_wallPool, _scoreCounter);
         _wallPool.Init(_scoreCounter);
     }
 
@@ -45,9 +45,12 @@ public class LevelController : MonoBehaviour
         _wallBuilder.UpdateValues(_wallPool, _currentLevelConfig);
         _wallBuilder.SpawnWall();
         
+        _wallTransition.UpdateValues(_currentLevelConfig);
+        
         _player = _playerSpawner.Spawn();
         _player.collisionComponent.OnCollisionDetected += EndGame;
         _player.Freeze(false);
+        _player.Prepare();
         
         _scoreCounter.Reset();
         _isPlaying = true;
@@ -69,12 +72,13 @@ public class LevelController : MonoBehaviour
 
         float delta = Time.deltaTime;
         
-        _wallTransition.Tick(delta * _currentLevelConfig.speed);
+        _wallTransition.Tick(delta);
         _wallBuilder.Tick();
     }
 
     private void OnDestroy()
     {
-        _player.collisionComponent.OnCollisionDetected -= EndGame;
+        if (_player)
+            _player.collisionComponent.OnCollisionDetected -= EndGame;
     }
 }

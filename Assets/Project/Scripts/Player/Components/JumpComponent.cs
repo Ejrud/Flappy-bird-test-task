@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Player
 {
@@ -6,6 +7,8 @@ namespace Player
     [RequireComponent(typeof(CircleCollider2D))]
     public class JumpComponent : MonoBehaviour
     {
+        public event Action OnJump;
+        
         public bool isFreeze
         {
             get { return _isFreeze; }
@@ -37,6 +40,7 @@ namespace Player
             
             _rigidbody2D.velocity = Vector2.zero;
             _rigidbody2D.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
+            OnJump?.Invoke();
         }
 
         private void OnDestroy()

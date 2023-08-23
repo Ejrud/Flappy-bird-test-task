@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class MenuService : MonoBehaviour
 {
-    [Header("Components")]
+    [Header("Components")] 
+    [SerializeField] private VolumeSelector _volumeSelector;
     [SerializeField] private DifficultSelector _difficultSelector;
     [SerializeField] private LevelController _levelController;
     [SerializeField] private ScoresContent _scoresContent;
@@ -22,6 +22,7 @@ public class MenuService : MonoBehaviour
         _playerModel = DataService.instance.playerModel;
         
         _difficultSelector.Initialize(this, _playerModel.levelDifficulty);
+        _volumeSelector.Initialize();
         
         _startButton.onClick.AddListener(PrepareGame);
         _exitButton.onClick.AddListener(() => Application.Quit());

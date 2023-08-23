@@ -55,7 +55,7 @@ public class WallBuilder : MonoBehaviour
     {
         float randomPositionY = Random.Range(-_levelConfig.holeOffset, _levelConfig.holeOffset);
         float middleHole = _previousHolePositonY + randomPositionY;
-        middleHole = Mathf.Clamp(middleHole, -_levelConfig.middleHoleHeght, _levelConfig.middleHoleHeght);
+        middleHole = Mathf.Clamp(middleHole, -_levelConfig.holeSize, _levelConfig.holeSize);
 
         float topHeight = MAX_WALL_HEIGHT - (middleHole + _levelConfig.holeSize / 2);
         float bottomHeight = -MAX_WALL_HEIGHT - (middleHole - _levelConfig.holeSize / 2);

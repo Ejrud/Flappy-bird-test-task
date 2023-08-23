@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty: 0
   wallPrefab: {fileID: 2172455921549379971, guid: d5c7564d6338f274fa2c5f52c1886603, type: 3}
-  multiplySpeedByScore: 1
-  speed: 1.5
+  scoreCountForMultiplySpeed: 5
+  speedMultiply: 0.02
+  startSpeed: 1.5
   wallDistance: 3
   holeOffset: 1
   holeSize: 3
-  middleHoleHeght: 3
