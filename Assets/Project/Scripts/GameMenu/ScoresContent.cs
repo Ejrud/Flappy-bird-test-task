@@ -12,18 +12,13 @@ public class ScoresContent : MonoBehaviour
     private void Start()
     {
         _playerModel = DataService.instance.playerModel;
-        _playerModel.OnScoreChanged += UpdateValues;
+        UpdateValues();
     }
 
-    private void UpdateValues()
+    public void UpdateValues()
     {
         _easyScore.text = _playerModel.scoresModel.easyScore.ToString();
         _mediumScore.text = _playerModel.scoresModel.mediumScore.ToString();
         _hardScore.text = _playerModel.scoresModel.hardScore.ToString();
-    }
-
-    private void OnDestroy()
-    {
-        _playerModel.OnScoreChanged -= UpdateValues;
     }
 }

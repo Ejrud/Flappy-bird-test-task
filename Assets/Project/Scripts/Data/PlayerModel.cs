@@ -3,8 +3,6 @@ using System;
 [Serializable]
 public class PlayerModel
 {
-    public event Action OnScoreChanged;
-    
     public PlayerModel(LevelDifficulty levelDifficulty, ScoresModel scoresModel ,float soundValue)
     {
         this.levelDifficulty = levelDifficulty;
@@ -36,8 +34,6 @@ public class PlayerModel
             default:
                 throw new NotImplementedException();
         }
-        
-        OnScoreChanged?.Invoke();
     }
 
     public void UpdateSoundValue(float value)

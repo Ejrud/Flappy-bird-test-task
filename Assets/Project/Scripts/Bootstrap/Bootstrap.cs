@@ -7,6 +7,7 @@ public class Bootstrap : MonoBehaviour
     
     private void Start()
     {
+        Application.targetFrameRate = 120;
         DataService.instance.TryLoadPlayerModel();
         SceneManager.LoadScene(GAME_INDEX);
     }

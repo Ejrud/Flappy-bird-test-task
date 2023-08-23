@@ -24,8 +24,8 @@ public class DataService : MonoBehaviour
 
     public void TryLoadPlayerModel()
     {
-        _loadPath = Application.dataPath + "/Project/SavedData/PlayerModel.json";
-        print(File.Exists(_loadPath));
+        _loadPath = Path.Combine(Application.persistentDataPath, "PlayerModel.json");
+        Debug.Log(File.Exists(_loadPath));
         
         if (File.Exists(_loadPath))
         {
