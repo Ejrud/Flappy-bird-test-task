@@ -16,6 +16,8 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
     public string macOSAppID;
     public bool isDebug;
     public bool getConversionData;
+
+    public string conversionData;
     //******************************//
 
 
@@ -47,7 +49,15 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
     {
         AppsFlyer.AFLog("didReceiveConversionData", conversionData);
         Dictionary<string, object> conversionDataDictionary = AppsFlyer.CallbackStringToDictionary(conversionData);
-        // add deferred deeplink logic here
+        
+        if (conversionDataDictionary == null)
+            this.conversionData = "Failed to load conversion data";
+        else
+        {
+            this.conversionData = "Conversion data: ";
+            foreach (var unit in conversionDataDictionary)
+                this.conversionData += unit.Value.ToString();
+        }
     }
 
     public void onConversionDataFail(string error)

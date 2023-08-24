@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuService : MonoBehaviour
@@ -13,6 +14,7 @@ public class MenuService : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _exitButton;
     [SerializeField] private GameObject _menuWindow;
+    [SerializeField] private TMP_Text _conversionTMP;
     
     private PlayerModel _playerModel;
     
@@ -20,6 +22,7 @@ public class MenuService : MonoBehaviour
     {
         OpenMenuWindow(true);
         _playerModel = DataService.instance.playerModel;
+        _conversionTMP.text = DataService.instance.appsFlyerService.GetConversionData();
         
         _difficultSelector.Initialize(this, _playerModel.levelDifficulty);
         _volumeSelector.Initialize();
@@ -29,6 +32,7 @@ public class MenuService : MonoBehaviour
         
         _levelController.Initialize();
         _levelController.OnStopGame += StopGame;
+
     }
 
     public void ChangeDifficulty(LevelDifficulty difficulty)

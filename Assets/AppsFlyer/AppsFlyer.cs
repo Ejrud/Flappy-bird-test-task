@@ -71,7 +71,6 @@ namespace AppsFlyerSDK
                 appsFlyerAndroid.initSDK(devKey, gameObject);
                 instance = appsFlyerAndroid;
                 instance.isInit = true;
-                
             }
 #elif UNITY_WSA_10_0
             AppsFlyerWindows.InitSDK(devKey, appID, gameObject);
