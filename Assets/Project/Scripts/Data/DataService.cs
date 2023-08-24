@@ -6,10 +6,12 @@ using UnityEngine;
 public class DataService : MonoBehaviour
 {
     public static DataService instance { get; private set; }
+    public AppsFlyerService appsFlyerService => _appsFlyerService;
     public PlayerModel playerModel => _playerModel;
 
     [SerializeField] private string _loadPath;
     [SerializeField] private PlayerModel _playerModel;
+    [SerializeField] private AppsFlyerService _appsFlyerService;
 
     private void Awake()
     {

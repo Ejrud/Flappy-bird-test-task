@@ -296,7 +296,6 @@ namespace AppsFlyerSDK.Tests
 
             AppsFlyer.getConversionData("ObjectName");
             AppsFlyerMOCKInterface.Received().getConversionData("ObjectName");
-
         }
 
         [Test]
